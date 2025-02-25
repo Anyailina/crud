@@ -10,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @Table(name = "students")

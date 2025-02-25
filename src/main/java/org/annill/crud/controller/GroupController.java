@@ -1,25 +1,19 @@
 package org.annill.crud.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.annill.crud.dto.GroupDto;
-import org.annill.crud.exception.EntityNotFoundException;
-import org.annill.crud.service.GroupService;
+import org.annill.crud.service.impl.GroupServiceImpl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/group")
 public class GroupController {
-    private GroupService groupService;
+    private final GroupServiceImpl groupService;
 
     @GetMapping
-    public GroupDto getByName(@RequestParam String name) {
-        Optional<GroupDto> optionalGroupDto = groupService.getByNumber(name);
-        if (optionalGroupDto.isPresent())
-            return optionalGroupDto.get();
-        else
-            throw new EntityNotFoundException();
+    public ResponseEntity<GroupDto> getByName(@RequestParam String name) {
+        return ResponseEntity.of(groupService.getByNumber(name));
     }
 
     @PostMapping
